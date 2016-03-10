@@ -11,15 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310140451) do
+ActiveRecord::Schema.define(version: 20160310181036) do
 
   create_table "orders", force: :cascade do |t|
-    t.text     "description",   limit: 65535,               null: false
-    t.float    "cost",          limit: 24,                  null: false
-    t.float    "discount",      limit: 24,    default: 1.0
-    t.string   "ip",            limit: 15,                  null: false
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.text     "description",   limit: 65535, null: false
+    t.float    "cost",          limit: 24,    null: false
+    t.string   "ip",            limit: 15,    null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "promo_code_id", limit: 4
   end
 
