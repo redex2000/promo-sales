@@ -11,18 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310123749) do
+ActiveRecord::Schema.define(version: 20160310140451) do
 
   create_table "orders", force: :cascade do |t|
-    t.text     "description", limit: 65535,               null: false
-    t.float    "cost",        limit: 24,                  null: false
-    t.float    "discount",    limit: 24,    default: 1.0
-    t.string   "ip",          limit: 15,                  null: false
-    t.string   "promo_code",  limit: 255
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.text     "description",   limit: 65535,               null: false
+    t.float    "cost",          limit: 24,                  null: false
+    t.float    "discount",      limit: 24,    default: 1.0
+    t.string   "ip",            limit: 15,                  null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "promo_code_id", limit: 4
   end
 
-  add_index "orders", ["promo_code"], name: "index_orders_on_promo_code", unique: true, using: :btree
+  add_index "orders", ["promo_code_id"], name: "index_orders_on_promo_code_id", using: :btree
 
+  create_table "promo_codes", force: :cascade do |t|
+    t.string   "code",         limit: 255,              null: false
+    t.float    "discount_sum", limit: 24,               null: false
+    t.integer  "count",        limit: 4,   default: -1
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_foreign_key "orders", "promo_codes"
 end
