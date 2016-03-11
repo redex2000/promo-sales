@@ -1,0 +1,23 @@
+h2 Generate promo-codes
+= form_for @promo_code do |f|
+  - if @promo_code.errors.any?
+    .errors
+      - @promo_code.errors.full_messages.each do |message|
+        p = message
+  = f.label :code
+  br
+  = f.text_field :code
+  br
+  = f.label :discount_sum
+  br
+  = f.text_field :discount_sum
+  br
+  = label_tag :'Enter promo codes count'
+  br
+  = text_field_tag :promo_codes_count
+  br
+  = f.label :count
+  br
+  = f.text_field :count
+  br
+  = f.submit :Generate
