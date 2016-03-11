@@ -6,4 +6,40 @@ class PromoCode < ActiveRecord::Base
   validates :discount_sum, numericality: {greater_than_or_equal_to: 0}
   validates :count, numericality: {greater_than_or_equal_to: -1}
   validates :code, uniqueness: true
+
+  before_validation :generate_code
+
+  protected
+  # Маска промокода берётся из поля code и задается строкой вида "123abc*#", где @ — произвольная буква латинского алфавита,
+  # # — произвольная цифра, * — произвольная буква или цифра.
+  # Таким образом, по маске "promo@@@###" могут быть сгенерированы коды "promoxyz123", "promoert777" и т.д.
+  def generate_code
+    self.code = generate_promo self.code
+  end
+
+  private
+  # Маска промокода задаётся строкой вида "123abc*#", где @ — произвольная буква латинского алфавита,
+  # # — произвольная цифра, * — произвольная буква или цифра.
+  # Таким образом, по маске "promo@@@###" могут быть сгенерированы коды "promoxyz123", "promoert777" и т.д.
+  # TODO: попробовать улучшить код за счёт других итераторов (н-р map!)
+  def generate_promo(mask)
+    result_code = ''
+    mask.each_char do |ch|
+      case ch
+        when '@'
+          str_arr = ('a'..'z').to_a
+          result_code += str_arr[rand(str_arr.count-1)]
+        when '#'
+          str_arr = ('0'..'9').to_a
+          result_code += str_arr[rand(str_arr.count-1)]
+        when '*'
+          str_arr = ('0'..'9').to_a + ('a'..'z').to_a
+          result_code += str_arr[rand(str_arr.count-1)]
+        else
+          result_code += ch
+      end
+    end
+    result_code
+  end
+
 end

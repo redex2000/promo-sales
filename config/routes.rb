@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
+  resources :promo_codes, only: [:new, :create] do
+    collection do
+      get 'admin'
+    end
+  end
+
   resources :orders, only: [:new, :create]
 
   root 'orders#new'
+
+  get 'admin' => 'promo_codes#admin'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
