@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :promo_codes, only: [:new, :create] do
     collection do
       get 'admin'
+      # Переместили сюда, т.к. не передаём идшник, он неизвестен
+      get 'activate'
     end
   end
 

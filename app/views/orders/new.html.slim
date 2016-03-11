@@ -12,10 +12,12 @@ h1 Order something
   br
   = f.text_field :cost
   br
-  = f.label :promo_code
-  br
-  = f.text_field :promo_code
-  br
   = f.hidden_field :ip
   br
   = f.submit :Order
+= form_for :promo_code, url: activate_promo_codes_path, method: :get, remote: true do |pf|
+  = pf.label :code
+  br
+  = pf.text_field :code
+  br
+  = pf.submit :Activate

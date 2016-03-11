@@ -1,0 +1,4 @@
+= label_tag :discount_sum, :'Discount'
+br
+p#discount_sum = show_discount @promo_code.discount_sum
+= hidden_field_tag :discount_sum_original, @promo_code.discount_sum

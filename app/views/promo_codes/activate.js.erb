@@ -1,0 +1,6 @@
+$( "<%= escape_javascript render @promo_code %>" ).insertBefore('#new_order input[type="submit"]');
+$( '<p> <%= label_tag :total_cost, :'Total cost' %></p>' ).insertBefore('#new_order input[type="submit"]');
+var total_cost = $('#order_cost').val() * $('#discount_sum_original').val();
+$( "<p id='total_cost'>"+total_cost+"</p>" ).insertBefore('#new_order input[type="submit"]');
+
+

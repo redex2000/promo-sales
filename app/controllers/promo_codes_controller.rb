@@ -22,6 +22,18 @@ class PromoCodesController < ApplicationController
     end
     redirect_to admin_path
   end
+  # TODO: везде в контроллере добавить проверки, если пользователь не передал нужный параметр, выводить ошибку в flash
+  def activate
+    begin
+      @promo_code = PromoCode.find_by_code! promo_code_params[:code]
+      respond_to do |format|
+        format.js {}
+      end
+    rescue RecordNotFound => exc
+      # TODO: обработать ошибку
+    end
+
+  end
 
   private
   def promo_code_params
