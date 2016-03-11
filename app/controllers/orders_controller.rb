@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
     if @order.save
       flash[:notice] = 'Created successfully'
     else
-      flash[:error] = 'Failure'
+      flash[:error] = 'Failed to create order'
     end
     redirect_to root_url
   end

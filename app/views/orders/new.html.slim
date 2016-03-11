@@ -1,5 +1,9 @@
 h1 Order something
 = form_for @order do |f|
+  - if @order.errors.any?
+    .errors
+      - @order.errors.full_messages.each do |message|
+        p = message
   = f.label :description
   br
   = f.text_area :description
