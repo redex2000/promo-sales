@@ -1,4 +1,8 @@
 class PromoCodesController < ApplicationController
+  # Перехват всех исключений данного типа
+  rescue_from ActiveRecord::RecordNotFound, with: :no_promo
+  rescue_from PromoCodeError, with: :cannot_be_used
+
   def admin
     @promo_code = PromoCode.new
     @orders = Order.all
@@ -24,20 +28,24 @@ class PromoCodesController < ApplicationController
   end
   # TODO: везде в контроллере добавить проверки, если пользователь не передал нужный параметр, выводить ошибку в flash
   def activate
-    begin
-      @promo_code = PromoCode.find_by_code! promo_code_params[:code]
-      respond_to do |format|
-        format.js {}
-      end
-    rescue RecordNotFound => exc
-      # TODO: обработать ошибку
+    @promo_code = PromoCode.find_by_code! promo_code_params[:code]
+    raise ::PromoCodeError.new('Promo code cannot be used') if @promo_code.count == 0
+    respond_to do |format|
+      format.js {}
     end
-
   end
 
   private
   def promo_code_params
     params.require(:promo_code).permit(:code, :discount_sum, :count)
+  end
+  # Обработка исключения в случае, если промокод не найден
+  def no_promo
+    render plain: 'No promo code found', status: 404
+  end
+  # Обработка исключения в случае, если промокод не найден
+  def cannot_be_used
+    render plain: 'Promo code cannot be used', status: 409
   end
 
 end

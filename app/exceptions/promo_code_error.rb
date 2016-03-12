@@ -1,0 +1,2 @@
+class PromoCodeError < StandardError
+end
