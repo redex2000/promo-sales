@@ -30,6 +30,8 @@ class PromoCodesController < ApplicationController
   def activate
     @promo_code = PromoCode.find_by_code! promo_code_params[:code]
     raise ::PromoCodeError.new('Promo code cannot be used') if @promo_code.count == 0
+    @order = Order.new
+    @order.cost = @promo_code.calculate_total_cost params[:order][:cost].to_i
     respond_to do |format|
       format.js {}
     end
@@ -43,7 +45,7 @@ class PromoCodesController < ApplicationController
   def no_promo
     render plain: 'No promo code found', status: 404
   end
-  # Обработка исключения в случае, если промокод не найден
+  # Обработка исключения в случае, если промокод не активен, т.е. кол-во его использований = 0
   def cannot_be_used
     render plain: 'Promo code cannot be used', status: 409
   end

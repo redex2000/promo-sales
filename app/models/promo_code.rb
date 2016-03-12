@@ -9,6 +9,15 @@ class PromoCode < ActiveRecord::Base
 
   before_validation :generate_code
 
+  # Подсчитываем итоговую стоимость, в зависимости от скидки
+  def calculate_total_cost(cost)
+    if discount_sum > 1
+      cost - discount_sum
+    else
+      cost * discount_sum
+end
+  end
+
   protected
   # Маска промокода берётся из поля code и задается строкой вида "123abc*#", где @ — произвольная буква латинского алфавита,
   # # — произвольная цифра, * — произвольная буква или цифра.
