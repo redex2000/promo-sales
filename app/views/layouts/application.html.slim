@@ -6,8 +6,15 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body
+    nav.navbar.navbar-fixed-top.navbar-inverse
+      = link_to '', '/', id: 'logo', class: 'navbar-brand'
+      ul.nav.navbar-nav.pull-right
+        li.nav-item
+          = link_to 'Order', '/orders/new', class: 'nav-link'
+        li.nav-item
+          = link_to 'Admin', '/admin', class: 'nav-link'
+
     div#messages
       - flash.each do |name, msg|
           div class=name = msg
-
     = yield

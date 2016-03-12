@@ -1,6 +1,6 @@
 $('#financial').empty();
 $( "<%= escape_javascript render @promo_code %>" ).appendTo('#financial');
 $( '<p> <%= label_tag :total_cost, :'Total cost' %></p>' ).appendTo('#financial');
-$( "<p id='total_cost'> <%= @order.cost %></p>" ).appendTo('#financial');
+$( "<p id='total_cost' class='form-control-static'> <%= @order.cost %></p>" ).appendTo('#financial');
 $( '#order_promo_code_id').val( "<%= @promo_code.id %>" );
 

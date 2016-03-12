@@ -1,21 +1,23 @@
-h2 All orders
-table
-  thead
-    tr
-      th Description
-      th Cost
-      th Discount
-      th Promo-code
-      th IP
-  tbody
-    - @orders.each do |order|
-      tr
-        td = order.description
-        td = order.cost
-        - unless order.promo_code.nil?
-          td = show_discount order.promo_code.discount_sum
-          td = order.promo_code.code
-        - else
-          td 0
-          td 0
-        td = order.ip
+div.container
+  h2 All orders
+  div.table-responsive
+    table.table.table-hover
+      thead
+        tr
+          th Description
+          th Cost
+          th Discount
+          th Promo-code
+          th IP
+      tbody
+        - @orders.each do |order|
+          tr
+            td = order.description
+            td = order.cost
+            - unless order.promo_code.nil?
+              td = show_discount order.promo_code.discount_sum
+              td = order.promo_code.code
+            - else
+              td 0
+              td 0
+            td = order.ip

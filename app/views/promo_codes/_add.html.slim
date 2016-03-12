@@ -1,23 +1,22 @@
-h2 Generate promo-codes
-= form_for @promo_code do |f|
-  - if @promo_code.errors.any?
-    .errors
-      - @promo_code.errors.full_messages.each do |message|
-        p = message
-  = f.label :code
-  br
-  = f.text_field :code
-  br
-  = f.label :discount_sum
-  br
-  = f.text_field :discount_sum
-  br
-  = label_tag :'Enter promo codes count'
-  br
-  = text_field_tag :promo_codes_count
-  br
-  = f.label :count
-  br
-  = f.text_field :count
-  br
-  = f.submit :Generate
+div.container
+  h2 Generate promo-codes
+  div.main-form
+    = form_for @promo_code do |f|
+      - if @promo_code.errors.any?
+        .errors
+          - @promo_code.errors.full_messages.each do |message|
+            p = message
+      div.form-group
+      = f.label :code
+      = f.text_field :code, class: 'form-control'
+      div.form-group
+      = f.label :discount_sum
+      = f.text_field :discount_sum, class: 'form-control'
+      div.form-group
+      = label_tag :'Enter promo codes count'
+      = text_field_tag :promo_codes_count, '', class: 'form-control'
+      div.form-group
+      = f.label :count
+      = f.text_field :count, class: 'form-control'
+      br
+      = f.submit :Generate, class: %w(btn btn-success)
