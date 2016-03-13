@@ -14,7 +14,8 @@ html
         li.nav-item
           = link_to 'Admin', '/admin', class: 'nav-link'
 
-    div#messages
+    aside#messages
       - flash.each do |name, msg|
-          div class=name = msg
+          div class=%w(alert alert-success) = msg
+      div :X
     = yield

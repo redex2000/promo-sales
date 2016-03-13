@@ -79,3 +79,45 @@ p {
   display: block;
   max-width: 30%;
 }
+
+/* Сообщение */
+#messages {
+    min-width: 150px;
+    min-height: 30px;
+    position: fixed;
+    border-radius: 5px;
+    background-color: #817EA6;
+    opacity: .3;
+    z-index: 2;
+    right: 10px;
+    top: 60px;
+    padding: 5px;
+    transition: opacity 0.5s 0.01s linear;
+    -webkit-transition: opacity 0.5s 0.01s linear;
+    -moz-transition: opacity 0.5s 0.01s linear;
+    -o-transition: opacity 0.5s 0.01s linear;
+}
+#messages > div {
+    position: relative;
+}
+
+#messages > div > div {
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+#messages > div > div:hover {
+    color: #2E296C;
+}
+
+#messages > div > span {
+    position: absolute;
+    left: 0;
+    top: 10px;
+}
+
+#messages:hover {
+    opacity: .7;
+}
