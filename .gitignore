@@ -15,5 +15,5 @@
 /db/*.sqlite3-journal
 /public/system
 
-config/secrets.yml
+#config/secrets.yml
 .idea/

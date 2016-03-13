@@ -1,0 +1,81 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+/* Настроечные файлы на основе boostrap */
+@import "bootstrap";
+
+@font-face {
+  src: url('<%= asset_path 'f1.woff' %>');
+  font-family: 'Welcome', 'sans-serif';
+}
+
+/* Универсальные стили */
+
+html {
+  overflow-y: scroll;
+}
+
+/* Отступ от верхнего фиксированного меню */
+body {
+  padding-top: 2em;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Типографика */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+  text-align: center;
+  margin-bottom: 30px;
+  font-family: 'Welcome';
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+}
+
+h2 {
+  font-size: 2em;
+  letter-spacing: -1px;
+  font-weight: normal;
+  color: #999;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+#logo {
+  background-image: url(<%= asset_path 'logo.png' %>);
+  width: 64px;
+  height: 41px;
+  display: block;
+  margin-left: 40px;
+}
+
+.main-form {
+  margin: 0 auto;
+  display: block;
+  max-width: 30%;
+}
