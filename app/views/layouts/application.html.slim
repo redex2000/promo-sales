@@ -14,8 +14,16 @@ html
         li.nav-item
           = link_to 'Admin', '/admin', class: 'nav-link'
 
+    - if flash.any?
     aside#messages
       - flash.each do |name, msg|
-          div class=%w(alert alert-success) = msg
-      div :X
+        - if name == 'error'
+          div class=%w(alert alert-danger fade in)
+            = link_to '&times;', '#', class: 'close', data: {dismiss: 'alert'}, aria: {label: 'close'}
+            = msg
+        - else
+          div class=%w(alert alert-success fade in)
+            = link_to '&times;', '#', class: 'close', data: {dismiss: 'alert'}, aria: {label: 'close'}
+            = msg
+
     = yield

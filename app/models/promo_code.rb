@@ -15,7 +15,7 @@ class PromoCode < ActiveRecord::Base
       cost - discount_sum
     else
       cost * discount_sum
-end
+    end
   end
 
   protected
@@ -23,6 +23,11 @@ end
   # # — произвольная цифра, * — произвольная буква или цифра.
   # Таким образом, по маске "promo@@@###" могут быть сгенерированы коды "promoxyz123", "promoert777" и т.д.
   def generate_code
+    # Эта ситуация может возникнуть, если мы пытаемся начать генерировать, а поле код не заполнено
+    # Передача маски через название промо-кода может запутывать, но так сделано, чтобы не плодить новых полей
+    if self.code.nil? || self.code.length == 0
+      raise PromoCodeMaskError, 'Mask cannot be empty'
+    end
     self.code = generate_promo self.code
   end
 

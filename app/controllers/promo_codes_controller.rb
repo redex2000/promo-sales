@@ -1,11 +1,20 @@
 class PromoCodesController < ApplicationController
   # Перехват всех исключений данного типа
   rescue_from ActiveRecord::RecordNotFound, with: :no_promo
-  rescue_from PromoCodeError, with: :cannot_be_used
+  rescue_from ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved, with: :render_admin
+  # Обработка исключения в случае, если промокод не активен, т.е. кол-во его использований = 0
+  rescue_from PromoCodeError do |exc|
+    render plain: exc.message, status: 409
+  end
+  # Пустое и 0 кол-во не допускается
+  rescue_from PromoCodeCountError, PromoCodeMaskError do |exc|
+    flash[:error] = exc.message
+    init
+    render 'admin'
+  end
 
   def admin
-    @promo_code = PromoCode.new
-    @orders = Order.all
+    init
   end
   # TODO: при сохранении м.т. оказаться, что сгенерированный промо-код нарушает ограничение на уникальность
   # в этом случае следует проверять, через @promo_code.errors.full_messages именно это нарушение.
@@ -15,16 +24,16 @@ class PromoCodesController < ApplicationController
   def create
     unless params[:promo_codes_count].nil?
       promo_codes_count = params[:promo_codes_count].to_i
+      raise PromoCodeCountError, 'Count of promo codes must be positive' if promo_codes_count <= 0
       promo_codes_count.times do |num|
         @promo_code = PromoCode.new promo_code_params
-        if @promo_code.save
+        if @promo_code.save!
           flash[:notice] = 'Generated successfully'
-        else
-          flash[:error] = 'Failed to generate promo code'
         end
       end
+      redirect_to admin_path
     end
-    redirect_to admin_path
+
   end
   # TODO: везде в контроллере добавить проверки, если пользователь не передал нужный параметр, выводить ошибку в flash
   def activate
@@ -38,6 +47,11 @@ class PromoCodesController < ApplicationController
   end
 
   private
+  def init
+    @promo_code = PromoCode.new
+    @orders = Order.all
+  end
+
   def promo_code_params
     params.require(:promo_code).permit(:code, :discount_sum, :count)
   end
@@ -45,9 +59,10 @@ class PromoCodesController < ApplicationController
   def no_promo
     render plain: 'No promo code found', status: 404
   end
-  # Обработка исключения в случае, если промокод не активен, т.е. кол-во его использований = 0
-  def cannot_be_used
-    render plain: 'Promo code cannot be used', status: 409
+  # Необходимо вызывать init, чтобы корректно выводил заказы
+  def render_admin
+    init
+    render 'admin'
   end
 
 end

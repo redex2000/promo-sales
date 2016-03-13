@@ -1,0 +1,2 @@
+class PromoCodeCountError < StandardError
+end

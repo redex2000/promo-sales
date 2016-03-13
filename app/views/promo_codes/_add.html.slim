@@ -3,9 +3,10 @@ div.container
   div.main-form
     = form_for @promo_code do |f|
       - if @promo_code.errors.any?
-        .errors
+        #errors
           - @promo_code.errors.full_messages.each do |message|
-            p = message
+            = link_to '&times;', '#', class: 'close', data: {dismiss: 'alert'}, aria: {label: 'close'}
+            = message
       div.form-group
       = f.label :code, 'Mask'
       = f.text_field :code, class: 'form-control'

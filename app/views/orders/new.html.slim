@@ -2,9 +2,11 @@ div.container.main-form
   h1 Order something
   = form_for @order do |f|
     - if @order.errors.any?
-      .errors
+      #errors
         - @order.errors.full_messages.each do |message|
-          p = message
+          div class=%w(alert alert-danger fade in)
+            = link_to '&times;', '#', class: 'close', data: {dismiss: 'alert'}, aria: {label: 'close'}
+            = message
     div.form-group
       = f.label :description
       = f.text_area :description, class: 'form-control'
