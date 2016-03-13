@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
       Order.transaction do
         @order = Order.new order_params
         @order.save!
-        if @order.promo_code.count > 0
+        if !@order.promo_code.nil? && @order.promo_code.count > 0
           @order.promo_code.count -= 1
           @order.promo_code.save!
         end
