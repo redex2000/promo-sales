@@ -1,5 +1,5 @@
 $(document).ready ->
-    $('button[name="button"]').click ->
+    $(document).on 'click', 'button[name="button"]', ->
       $.ajax(
         url: "/promo_codes/activate",
         type: 'get',
