@@ -5,7 +5,7 @@ div.container
       - if @promo_code.errors.any?
         #errors
           - @promo_code.errors.full_messages.each do |message|
-            = link_to '&times;', '#', class: 'close', data: {dismiss: 'alert'}, aria: {label: 'close'}
+            = link_to '×', '#', class: 'close', data: {dismiss: 'alert'}, aria: {label: 'close'}
             = message
       div.form-group
       = f.label :code, 'Mask'
