@@ -4,9 +4,7 @@ div.container.main-form
     - if @order.errors.any?
       #errors
         - @order.errors.full_messages.each do |message|
-          div class=%w(alert alert-danger fade in)
-            = link_to '×', '#', class: 'close', data: {dismiss: 'alert'}, aria: {label: 'close'}
-            = message
+          = show_message(:error, message)
     div.form-group
       = f.label :description
       = f.text_area :description, class: 'form-control'

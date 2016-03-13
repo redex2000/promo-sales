@@ -17,13 +17,6 @@ html
     - if flash.empty?
     aside#messages
       - flash.each do |name, msg|
-        - if name == 'error'
-          div class=%w(alert alert-danger fade in)
-            = link_to '×', '#', class: 'close', data: {dismiss: 'alert'}, aria: {label: 'close'}
-            = msg
-        - else
-          div class=%w(alert alert-success fade in)
-            = link_to '×', '#', class: 'close', data: {dismiss: 'alert'}, aria: {label: 'close'}
-            = msg
+        = show_message(name, msg)
 
     = yield

@@ -1,15 +1,16 @@
 module ApplicationHelper
   # Показывает сообщение в bootstrap-стиле
   def show_message(name, msg)
-    classes = '.alert'
+    classes = 'alert'
     case name
       when :info
-        classes += '.alert-success'
+        classes += ' alert-success'
       when :error
-        classes += '.alert-danger'
+        classes += ' alert-danger'
       else
-        classes += '.alert-success'
+        classes += ' alert-success'
     end
-    "div Test"
+    classes += ' fade in'
+    makeup_str = content_tag :div, link_to('×', '#', class: 'close', data: {dismiss: 'alert'}, aria: {label: 'close'}) + msg, class: classes
   end
 end
