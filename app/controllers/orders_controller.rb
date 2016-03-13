@@ -6,18 +6,11 @@ class OrdersController < ApplicationController
     @order.ip = request.remote_ip
   end
   # TODO: М.б. устанавливать IP пользователя в create, а не в new, только что делать в этом случае с массовым присваиванием
-  # В транзакции реализуем создание заказа и уменьшаем кол-во использований для соответствующего промокода
   def create
-    Order.transaction do
-      @order = Order.new order_params
-      @order.save!
-      if !@order.promo_code.nil? && @order.promo_code.count > 0
-        @order.promo_code.count -= 1
-        @order.promo_code.save!
-      end
-      flash[:notice] = 'Created successfully'
-      redirect_to root_url
-    end
+    @order = Order.new order_params
+    @order.activate
+    flash[:notice] = 'Created successfully'
+    redirect_to root_url
   end
 
   private

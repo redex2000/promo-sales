@@ -17,6 +17,11 @@ class PromoCode < ActiveRecord::Base
       cost * discount_sum
     end
   end
+  # Использовать промо-код
+  def use
+    self.count -= 1
+    self.save!
+  end
 
   protected
   # Маска промокода берётся из поля code и задается строкой вида "123abc*#", где @ — произвольная буква латинского алфавита,
