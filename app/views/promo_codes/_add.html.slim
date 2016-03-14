@@ -9,14 +9,17 @@ div.container
       div.form-group
       = f.label :code, 'Mask'
       = f.text_field :code, class: 'form-control'
+      = content_tag :p, '@ — letter, # - digit, * - digit or letter', class: 'help-block'
+      = content_tag :p, 'i.e. by mask "promo@@@###" can be generated promo-codes "promoxyz123", "promoert777" etc.', class: 'help-block'
       div.form-group
       = f.label :discount_sum
       = f.text_field :discount_sum, class: 'form-control', pattern: '\d+\.?\d*'
       div.form-group
       = label_tag :'Enter promo codes count'
-      = text_field_tag :promo_codes_count, '', class: 'form-control'
+      = text_field_tag :promo_codes_count, '', class: 'form-control', title: 'How many promo-codes can be generated'
       div.form-group
       = f.label :count
       = f.text_field :count, class: 'form-control'
+      = content_tag :p, 'How many times promo-code can be used', class: 'help-block'
       br
       = f.submit :Generate, class: %w(btn btn-success)
