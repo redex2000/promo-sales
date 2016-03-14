@@ -4,7 +4,7 @@ div.container.main-form
     - if @order.errors.any?
       #errors
         - @order.errors.full_messages.each do |message|
-          = show_message(:error, message)
+          = show_message('error', message)
     div.form-group
       = f.label :description
       = f.text_area :description, class: 'form-control'

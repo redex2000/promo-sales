@@ -5,7 +5,7 @@ div.container
       - if @promo_code.errors.any?
         #errors
           - @promo_code.errors.full_messages.each do |message|
-            = show_message(:error, message)
+            = show_message('error', message)
       div.form-group
       = f.label :code, 'Mask'
       = f.text_field :code, class: 'form-control'

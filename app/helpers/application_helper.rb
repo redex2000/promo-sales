@@ -3,9 +3,9 @@ module ApplicationHelper
   def show_message(name, msg)
     classes = 'alert'
     case name
-      when :info
+      when 'info'
         classes += ' alert-success'
-      when :error
+      when 'error'
         classes += ' alert-danger'
       else
         classes += ' alert-success'
