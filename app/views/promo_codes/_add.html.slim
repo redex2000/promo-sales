@@ -11,7 +11,7 @@ div.container
       = f.text_field :code, class: 'form-control'
       div.form-group
       = f.label :discount_sum
-      = f.text_field :discount_sum, class: 'form-control'
+      = f.text_field :discount_sum, class: 'form-control', pattern: '\d+\.?\d*'
       div.form-group
       = label_tag :'Enter promo codes count'
       = text_field_tag :promo_codes_count, '', class: 'form-control'
