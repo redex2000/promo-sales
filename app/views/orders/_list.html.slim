@@ -13,7 +13,7 @@ div.container
         - @orders.each do |order|
           tr
             td = order.description
-            td = order.cost
+            td[title='Total cost, with discount if any'] = show_cost order
             - unless order.promo_code.nil?
               td = show_discount order.promo_code.discount_sum
               td = order.promo_code.code
