@@ -41,15 +41,16 @@ gem 'bootstrap-sass'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'rspec-rails', '~> 3.0'
-  # quickly define prototypes for each of your models and ask for instances
-  # with properties that are important to the test at hand
-  gem 'factory_girl_rails', '~> 4.0'
 end
 
 group :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+  gem 'rspec-rails', '~> 3.0'
+  # quickly define prototypes for each of your models and ask for instances
+  # with properties that are important to the test at hand
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'shoulda'
 end
 
 group :development do

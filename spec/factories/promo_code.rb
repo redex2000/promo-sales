@@ -1,11 +1,10 @@
 #coding utf-8
 FactoryGirl.define do
-  factory :order do
-    description 'Good order'
-    cost 5000.5
-    ip '10.165.14.243'
+  factory :promo_code do
+    code '88t'
+    discount_sum 0.5
+    count 1
     created_at '2016-03-10 14:20:18'
     updated_at '2016-03-10 14:20:18'
-    promo_code
   end
 end

@@ -11,8 +11,16 @@ RSpec.describe Order, type: :model do
     end
 
     it 'should have right values' do
-      # @order.save
-      expect(@order.description).to eq('Good order')
+      @order.save
+      @order_from_db = Order.first
+      expect(@order_from_db.description).to eq('Good order')
+    end
+  end
+
+  describe 'belongs_to' do
+    it 'promo_code' do
+      promo_code = Order.reflect_on_association(:promo_code)
+      expect(promo_code.macro).to eq(:belongs_to)
     end
   end
 end
