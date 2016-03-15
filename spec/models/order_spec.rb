@@ -19,8 +19,7 @@ RSpec.describe Order, type: :model do
 
   describe 'belongs_to' do
     it 'promo_code' do
-      promo_code = Order.reflect_on_association(:promo_code)
-      expect(promo_code.macro).to eq(:belongs_to)
+      should belong_to(:promo_code)
     end
   end
 end
